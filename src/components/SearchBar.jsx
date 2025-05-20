@@ -1,28 +1,38 @@
-import { useState } from 'react';
+import { FaSearch } from "react-icons/fa";
+import { useState } from "react";
 
-const SearchBar = ({ active, toggleSearch }) => {
-  const [searchTerm, setSearchTerm] = useState('');
+function SearchBar({ onSearch }) {
+  const [query, setQuery] = useState("");
 
-  const handleSearch = (e) => {
-    e.preventDefault();
-    // Search functionality would be implemented here
-    console.log('Searching for:', searchTerm);
+  const handleKeyDown = (e) => {
+    if (e.key === "Enter" && onSearch) {
+      onSearch(query);
+    }
   };
 
   return (
-    <div className={`search-container ${active ? 'active' : ''}`}>
-      <form onSubmit={handleSearch}>
-        <input 
-          type="text" 
-          id="search-input" 
-          placeholder="Search for books, authors, genres..." 
-          value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
-        />
-        <button type="submit" id="search-btn">Search</button>
-      </form>
+    <div
+      style={{
+        display: "flex",
+        alignItems: "center",
+        border: "1px solid #ccc",
+        padding: "5px 10px",
+        borderRadius: "5px",
+        maxWidth: "400px",
+        margin: "0 auto"
+      }}
+    >
+      <input
+        type="text"
+        placeholder="Search..."
+        value={query}
+        onChange={(e) => setQuery(e.target.value)}
+        onKeyDown={handleKeyDown}
+        style={{ border: "none", outline: "none", flex: 1 }}
+      />
+      <FaSearch style={{ fontSize: "18px", color: "#333" }} />
     </div>
   );
-};
+}
 
 export default SearchBar;

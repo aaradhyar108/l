@@ -4,7 +4,7 @@ import BookCard from '../components/BookCard'
 import SearchBar from '../components/SearchBar' // ✅ Import the SearchBar
 import axios from 'axios'
 
-const Books = () => {
+const Categories = () => {
   const [books, setBooks] = useState([])    
   const [loading, setLoading] = useState(true)
   const [searchParams] = useSearchParams()
@@ -56,4 +56,4 @@ const Books = () => {
   )
 }
 
-export default Books
+export default Categories

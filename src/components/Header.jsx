@@ -1,32 +1,25 @@
-import { Link } from 'react-router-dom';
-import { FaBookOpen, FaSearch } from 'react-icons/fa';
-import SearchBar from './SearchBar';
+import { Link } from 'react-router-dom'
+import { FiShoppingCart } from 'react-icons/fi'
 
-const Header = ({ toggleSearch, openAuthModal, searchActive }) => {
+const Header = () => {
   return (
-    <header>
-      <div className="logo">
-        <FaBookOpen />
-        <Link to="/"><h1>BookNook</h1></Link>
+    <header className="header">
+      <div className="container">
+        <Link to="/" className="logo">BookNook</Link>
+        <nav>
+          <Link to="/">Home</Link>
+          <Link to="Books">Books</Link>
+          <Link to="Categories">Categories</Link>
+          <Link to="About">About</Link>
+          <Link to="Contact">Contact</Link>
+          <Link to="checkout" className="cart-icon">
+            <FiShoppingCart />
+            <span className="cart-count">0</span>
+          </Link>
+        </nav>
       </div>
-      <nav>
-        <ul>
-          <li><Link to="/">Home</Link></li>
-          <li><Link to="/books">Books</Link></li>
-          <li><a href="#categories">Categories</a></li>
-          <li><Link to="/about">About</Link></li>
-          <li><a href="#contact">Contact</a></li>
-        </ul>
-      </nav>
-      <div className="user-actions">
-        <button onClick={() => openAuthModal('login')}>Login</button>
-        <button onClick={() => openAuthModal('signup')}>Sign Up</button>
-        <FaSearch onClick={toggleSearch} id="search-icon" />
-      </div>
-      
-      <SearchBar active={searchActive} toggleSearch={toggleSearch} />
     </header>
-  );
-};
+  )
+}
 
-export default Header;
+export default Header

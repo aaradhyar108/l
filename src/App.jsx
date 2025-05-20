@@ -1,67 +1,24 @@
-import { useState } from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Header from './components/Header';
-import Footer from './components/Footer';
-import Home from './pages/Home';
-import About from './pages/About';
-import Books from './pages/Books';
-import './App.css';
+import { Routes, Route } from 'react-router-dom'
+import Home from './Pages/Home'
+import Books from './Pages/Books';
+import Categories from './Pages/Categories'; 
+import BookDetails from './pages/BookDetails'
+import Checkout from './pages/Checkout'
+import Header from './components/Header'
+import './index.css'
 
 function App() {
-  const [searchActive, setSearchActive] = useState(false);
-  const [authModalOpen, setAuthModalOpen] = useState(false);
-  const [authMode, setAuthMode] = useState('login');
-  const [bookModalOpen, setBookModalOpen] = useState(false);
-  const [selectedBook, setSelectedBook] = useState(null);
-
-  const toggleSearch = () => setSearchActive(!searchActive);
-  const openAuthModal = (mode) => {
-    setAuthMode(mode);
-    setAuthModalOpen(true);
-  };
-  const closeModal = () => {
-    setAuthModalOpen(false);
-    setBookModalOpen(false);
-  };
-  const showBookDetails = (book) => {
-    setSelectedBook(book);
-    setBookModalOpen(true);
-  };
-
   return (
-    <Router>
-      <div className="app">
-        <Header 
-          toggleSearch={toggleSearch} 
-          openAuthModal={openAuthModal} 
-          searchActive={searchActive}
-        />
-        
-        <main>
-          <Routes>
-            <Route path="/" element={<Home showBookDetails={showBookDetails} />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/books" element={<Books showBookDetails={showBookDetails} />} />
-          </Routes>
-        </main>
-
-        <Footer />
-
-        {/* Modals */}
-        {authModalOpen && (
-          <Modal onClose={closeModal}>
-            <AuthForms mode={authMode} switchMode={() => setAuthMode(authMode === 'login' ? 'signup' : 'login')} />
-          </Modal>
-        )}
-
-        {bookModalOpen && selectedBook && (
-          <Modal onClose={closeModal}>
-            <BookDetails book={selectedBook} />
-          </Modal>
-        )}
-      </div>
-    </Router>
-  );
+    <div className="app">
+      <Header />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/Books" element={<Books />} />
+        <Route path="/Categories" element={<Categories />} />
+        <Route path="checkout" element={<Checkout />} />
+      </Routes>
+    </div>
+  )
 }
 
-export default App;
+export default App
